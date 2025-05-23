@@ -1,21 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 
+const PORT = process.env.PORT || 3000;
 const BASE_URL = "/api/v1";
 
 const votes = new Map();
 
 app.use(express.json());
-
-/*
- * GET      /talks
- * POST     /talks
- * GET      /talks/:id
- * PUT      /talks/:id
- * DELETE   /talks/:id
- * GET      /talks/:id/votes
- * POST     /talks/:id/votes
- */
 
 app.post(`${BASE_URL}/talks`, (req, res) => {
     const talkId = req.body.talkId;
@@ -77,6 +69,6 @@ app.get(`${BASE_URL}/talks/:talkId/votes/result`, (req, res) => {
     res.status(200).json({ message: "Vote result", result });
 });
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
